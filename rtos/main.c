@@ -472,7 +472,7 @@ void MonEDSMEn_init(void const * argument)
 
 	/**********************************************************************************************
 	*
-	* This task/thread is polls for an EDSM enable signal. As of now, a counter edsm is used to see
+	* This task/thread polls for an EDSM enable signal. As of now, a counter edsm is used to see
 	* if the truly polls if the GPIO pin reads a high signal. A blink of an LED will signal it has
 	* entered EDSM
 	*
