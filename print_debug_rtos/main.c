@@ -74,6 +74,8 @@ void MonSResetReq_init(void const * argument);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+//For printing words when using sprintf()
+//Use for troubleshooting if the program reaches certain stages
 int _write(int file, char *ptr, int len)
 {
 	int i=0;
@@ -119,6 +121,7 @@ int main(void)
   MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
 
+  // Test if print is working and initializations have finished
   printf(" Starting...\n");
 
   /* USER CODE END 2 */
@@ -415,6 +418,15 @@ static void MX_GPIO_Init(void)
 void NormalStage_init(void const * argument)
 {
   /* USER CODE BEGIN 5 */
+
+	/**********************************************************************************************
+	*
+	* This task/thread will handle the power sequencing on start up as well as the reverse sequencing if a rail
+	* is powered in an incorrect order. This is performed by reading the status of the GPIO pin of
+	* each rail to see the next appropriate step. It may also incorporate the ADC voltage monitoring.
+	*
+	**********************************************************************************************/
+
   /* Infinite loop */
   for(;;)
   {
@@ -435,6 +447,14 @@ void NormalStage_init(void const * argument)
 void MonEDSMEn_init(void const * argument)
 {
   /* USER CODE BEGIN MonEDSMEn_init */
+
+	/**********************************************************************************************
+	*
+	* This task/thread will poll for an EDSM enable signal. If a EDSM signal is read, it will
+	* suspend the NormalStage thread and resume the EDSM thread.
+	*
+	**********************************************************************************************/
+
   /* Infinite loop */
   for(;;)
   {
@@ -458,6 +478,17 @@ void MonEDSMEn_init(void const * argument)
 void MonHResetReq_init(void const * argument)
 {
   /* USER CODE BEGIN MonHResetReq_init */
+
+	/**********************************************************************************************
+	*
+	* This task/thread is polls for a hard reset request. Upon receiving a hard reset request, it
+	* will send a hard reset signal on an output pin for .500 seconds
+	*
+	* TO ADD/FIX:
+	* -
+	*
+	**********************************************************************************************/
+
   /* Infinite loop */
   for(;;)
   {
@@ -481,6 +512,14 @@ void MonHResetReq_init(void const * argument)
 void MonSResetReq_init(void const * argument)
 {
   /* USER CODE BEGIN MonSResetReq_init */
+
+	/**********************************************************************************************
+	*
+	* This task/thread will poll for a soft reset request. Upon receiving a soft reset request, it
+	* will send a hard reset signal on an output pin as a chirp?
+	*
+	**********************************************************************************************/
+
   /* Infinite loop */
   for(;;)
   {
