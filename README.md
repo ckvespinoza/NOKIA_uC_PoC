@@ -7,6 +7,8 @@ and monitoring of signals like EDSM enable, hard reset request and soft reset re
 handling of tasks within the "rtos" directory. "print_debug_rtos" is the backbone of the tasks using FreeRTOS with the functions
 replaced with sprintf functions for debugging purposes.
 
+DIRECTORY DESCRIPTIONS:
+
 "startup" - This was my original code for setting up the power sequence functionality of the power manager. It includes:
 
 - Utilization of the HAL library for GPIO reads and writes
